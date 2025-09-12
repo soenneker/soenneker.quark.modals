@@ -1,0 +1,56 @@
+@using Soenneker.Extensions.String
+@using Soenneker.Quark.Divs
+@using Soenneker.Quark.Headings
+@using Soenneker.Quark.Buttons
+@using Soenneker.Quark.Buttons.Enums
+@using Microsoft.AspNetCore.Components.Web
+@inherits Soenneker.Quark.Components.Element
+
+<Div @attributes="BuildAttributes()">
+    @if (ModalTitle.HasContent())
+    {
+        <H5 Class="modal-title">@ModalTitle</H5>
+    }
+    @ChildContent
+    @if (ShowCloseButton)
+    {
+        <Button Type="@ButtonType.Button" Class="btn-close" OnClick="HandleClose">
+        </Button>
+    }
+</Div>
+
+@code {
+    [Parameter]
+    public string? ModalTitle { get; set; }
+
+    [Parameter]
+    public bool ShowCloseButton { get; set; } = true;
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    [CascadingParameter]
+    public Modal? ParentModal { get; set; }
+
+    protected override Dictionary<string, object> BuildAttributes()
+    {
+        Dictionary<string, object> attributes = base.BuildAttributes();
+
+        if (attributes.TryAdd("class", "modal-header")) 
+	        return attributes;
+
+        string currentClass = attributes["class"]?.ToString() ?? "";
+
+        if (!currentClass.Contains("modal-header"))
+	        attributes["class"] = AppendToClass(currentClass, "modal-header");
+
+        return attributes;
+    }
+
+    private async Task HandleClose(MouseEventArgs args)
+    {
+        await OnClose.InvokeAsync();
+        if (ParentModal != null)
+            await ParentModal.Hide();
+    }
+}

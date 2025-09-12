@@ -1,0 +1,23 @@
+@using Soenneker.Quark.Divs
+@inherits Soenneker.Quark.Components.Element
+
+<Div @attributes="BuildAttributes()">
+    @ChildContent
+</Div>
+
+@code {
+    protected override Dictionary<string, object> BuildAttributes()
+    {
+        Dictionary<string, object> attributes = base.BuildAttributes();
+
+        if (attributes.TryAdd("class", "modal-footer")) 
+	        return attributes;
+
+        string currentClass = attributes["class"].ToString() ?? "";
+
+        if (!currentClass.Contains("modal-footer"))
+	        attributes["class"] = AppendToClass(currentClass, "modal-footer");
+
+        return attributes;
+    }
+}
