@@ -2,8 +2,9 @@
 @using Soenneker.Quark.Divs
 @using Soenneker.Quark.Headings
 @using Soenneker.Quark.Buttons
-@using Soenneker.Quark.Buttons.Enums
 @using Microsoft.AspNetCore.Components.Web
+@using Soenneker.Blazor.Extensions.EventCallback
+@using Soenneker.Quark.Enums.ButtonTypes
 @inherits Soenneker.Quark.Components.Element
 
 <Div @attributes="BuildAttributes()">
@@ -49,7 +50,8 @@
 
     private async Task HandleClose(MouseEventArgs args)
     {
-        await OnClose.InvokeAsync();
+        await OnClose.InvokeIfHasDelegate();
+
         if (ParentModal != null)
             await ParentModal.Hide();
     }
