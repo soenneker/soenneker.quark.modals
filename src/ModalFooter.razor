@@ -10,13 +10,7 @@
     {
         Dictionary<string, object> attributes = base.BuildAttributes();
 
-        if (attributes.TryAdd("class", "modal-footer")) 
-	        return attributes;
-
-        string currentClass = attributes["class"].ToString() ?? "";
-
-        if (!currentClass.Contains("modal-footer"))
-	        attributes["class"] = AppendToClass(currentClass, "modal-footer");
+        AppendToClassAttr(attributes, "modal-footer");
 
         return attributes;
     }

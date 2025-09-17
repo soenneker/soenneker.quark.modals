@@ -37,13 +37,7 @@
     {
         Dictionary<string, object> attributes = base.BuildAttributes();
 
-        if (attributes.TryAdd("class", "modal-header")) 
-	        return attributes;
-
-        string currentClass = attributes["class"]?.ToString() ?? "";
-
-        if (!currentClass.Contains("modal-header"))
-	        attributes["class"] = AppendToClass(currentClass, "modal-header");
+        AppendToClassAttr(attributes, "modal-header");
 
         return attributes;
     }
