@@ -8,7 +8,7 @@
 @if (Visible)
 {
     <CascadingValue Value="@this">
-        <Div Class="@GetModalClasses()" Style="@GetModalStyles()" TabIndex="-1" @attributes="BuildAttributes()">
+        <Div Class="@GetModalClasses()" Style="@GetModalStyles()" TabIndex="-1" OnKeyDown="HandleKeyDown" @attributes="BuildAttributes()">
             <Div Class="@GetDialogClasses()">
                 <Div Class="modal-content">
                     @ChildContent
@@ -111,6 +111,14 @@
             attributes["data-bs-backdrop"] = "static";
             
         return attributes;
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (!Static && e.Key == "Escape")
+        {
+            await Hide();
+        }
     }
 
     private async Task HandleBackdropClick(MouseEventArgs args)
