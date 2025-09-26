@@ -1,11 +1,9 @@
 @using Soenneker.Extensions.String
-@using Soenneker.Quark.Divs
-@using Soenneker.Quark.Headings
-@using Soenneker.Quark.Buttons
 @using Microsoft.AspNetCore.Components.Web
 @using Soenneker.Blazor.Extensions.EventCallback
 @using Soenneker.Quark.Enums.ButtonTypes
-@inherits Soenneker.Quark.Components.Element
+
+@inherits Soenneker.Quark.Element
 
 <Div @attributes="BuildAttributes()">
     @if (ModalTitle.HasContent())
