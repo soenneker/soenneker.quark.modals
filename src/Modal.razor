@@ -1,8 +1,8 @@
 @using Soenneker.Extensions.String
-@using Soenneker.Quark.Enums.Size
-@using Soenneker.Quark.Divs
 @using Microsoft.AspNetCore.Components.Web
 @using Soenneker.Blazor.Extensions.EventCallback
+@using Soenneker.Quark.Enums
+
 @inherits Soenneker.Quark.Element
 
 @if (Visible)
@@ -23,6 +23,8 @@
 }
 
 @code {
+	public override string? Name { get; set; } = "Modal";
+
     [Parameter]
     public bool Visible { get; set; }
 
@@ -113,12 +115,14 @@
         return attributes;
     }
 
-    private async Task HandleKeyDown(KeyboardEventArgs e)
+    protected override async Task HandleKeyDown(KeyboardEventArgs e)
     {
         if (!Static && e.Key == "Escape")
         {
             await Hide();
         }
+
+        await base.HandleKeyDown(e);
     }
 
     private async Task HandleBackdropClick(MouseEventArgs args)

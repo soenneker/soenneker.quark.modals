@@ -3,6 +3,8 @@
 @ChildContent
 
 @code {
+	public override string? Name { get; set; } = "ModalContent";
+
 	[CascadingParameter]
 	public Modal? ParentModal { get; set; }
 }

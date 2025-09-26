@@ -1,7 +1,7 @@
 @using Soenneker.Extensions.String
 @using Microsoft.AspNetCore.Components.Web
 @using Soenneker.Blazor.Extensions.EventCallback
-@using Soenneker.Quark.Enums.ButtonTypes
+@using Soenneker.Quark.Enums
 
 @inherits Soenneker.Quark.Element
 
@@ -19,6 +19,8 @@
 </Div>
 
 @code {
+	public override string? Name { get; set; } = "ModalHeader";
+
     [Parameter]
     public string? ModalTitle { get; set; }
 
