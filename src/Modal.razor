@@ -41,7 +41,7 @@
     public bool Scrollable { get; set; }
 
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public CssValue<SizeBuilder>? Size { get; set; } = Size.Default;
 
     [Parameter]
     public bool Static { get; set; }
@@ -78,7 +78,7 @@
         if (Scrollable)
             classes += " modal-dialog-scrollable";
             
-        if (Size != Size.Default)
+        if (Size != null && !Size.Value.IsEmpty)
             classes += $" modal-{Size.Value}";
             
         return classes;

@@ -10,7 +10,7 @@
     public override string? Name { get; set; } = "ModalTitle";
 
     [Parameter]
-    public Scale Scale { get; set; } = Scale.S5;
+    public CssValue<ScaleBuilder>? Scale { get; set; } = Scale.S5;
 
     protected override Dictionary<string, object> BuildAttributes()
     {
