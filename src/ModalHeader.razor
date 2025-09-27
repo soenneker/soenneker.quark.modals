@@ -1,37 +1,11 @@
-@using Soenneker.Extensions.String
-@using Microsoft.AspNetCore.Components.Web
-@using Soenneker.Blazor.Extensions.EventCallback
-@using Soenneker.Quark.Enums
-
 @inherits Soenneker.Quark.Element
 
 <Div @attributes="BuildAttributes()">
-    @if (ModalTitle.HasContent())
-    {
-        <H5 Class="modal-title">@ModalTitle</H5>
-    }
     @ChildContent
-    @if (ShowCloseButton)
-    {
-        <Button Type="@ButtonType.Button" Class="btn-close" OnClick="HandleClose">
-        </Button>
-    }
 </Div>
 
 @code {
 	public override string? Name { get; set; } = "ModalHeader";
-
-    [Parameter]
-    public string? ModalTitle { get; set; }
-
-    [Parameter]
-    public bool ShowCloseButton { get; set; } = true;
-
-    [Parameter]
-    public EventCallback OnClose { get; set; }
-
-    [CascadingParameter]
-    public Modal? ParentModal { get; set; }
 
     protected override Dictionary<string, object> BuildAttributes()
     {
@@ -40,13 +14,5 @@
         AppendToClassAttr(attributes, "modal-header");
 
         return attributes;
-    }
-
-    private async Task HandleClose(MouseEventArgs args)
-    {
-        await OnClose.InvokeIfHasDelegate();
-
-        if (ParentModal != null)
-            await ParentModal.Hide();
     }
 }

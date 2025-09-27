@@ -1,0 +1,56 @@
+@using Soenneker.Extensions.String
+@using Microsoft.AspNetCore.Components.Web
+@using Soenneker.Quark.Enums
+
+@inherits Soenneker.Quark.Element
+
+<Button Type="@ButtonType.Button" Class="@GetButtonClasses()" OnClick="HandleClick" @attributes="BuildAttributes()">
+    @if (ChildContent == null)
+    {
+        <Span Class="visually-hidden">Close</Span>
+    }
+    else
+    {
+        @ChildContent
+    }
+</Button>
+
+@code {
+    public override string? Name { get; set; } = "ModalCloseButton";
+
+    [Parameter]
+    public bool AutoClose { get; set; } = true;
+
+    [CascadingParameter]
+    public Modal? ParentModal { get; set; }
+
+    private string GetButtonClasses()
+    {
+        var classes = "btn-close";
+
+        if (Class.HasContent())
+            classes += $" {Class}";
+
+        return classes;
+    }
+
+    protected override Dictionary<string, object> BuildAttributes()
+    {
+        Dictionary<string, object> attributes = base.BuildAttributes();
+
+        attributes["aria-label"] = "Close";
+        attributes["data-bs-dismiss"] = "modal";
+
+        return attributes;
+    }
+
+    protected override async Task HandleClick(MouseEventArgs e)
+    {
+        await base.HandleClick(e);
+
+        if (AutoClose && ParentModal != null)
+        {
+            await ParentModal.Hide();
+        }
+    }
+}

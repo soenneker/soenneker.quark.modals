@@ -1,0 +1,23 @@
+@using Soenneker.Quark.Enums
+
+@inherits Soenneker.Quark.Element
+
+<Heading Scale="@Scale" @attributes="BuildAttributes()">
+    @ChildContent
+</Heading>
+
+@code {
+    public override string? Name { get; set; } = "ModalTitle";
+
+    [Parameter]
+    public Scale Scale { get; set; } = Scale.S5;
+
+    protected override Dictionary<string, object> BuildAttributes()
+    {
+        Dictionary<string, object> attributes = base.BuildAttributes();
+
+        AppendToClassAttr(attributes, "modal-title");
+
+        return attributes;
+    }
+}
