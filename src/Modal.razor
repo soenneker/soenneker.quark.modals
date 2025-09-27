@@ -1,7 +1,6 @@
 @using Soenneker.Extensions.String
 @using Microsoft.AspNetCore.Components.Web
 @using Soenneker.Blazor.Extensions.EventCallback
-@using Soenneker.Quark.Enums
 
 @inherits Soenneker.Quark.Element
 
@@ -41,7 +40,7 @@
     public bool Scrollable { get; set; }
 
     [Parameter]
-    public CssValue<SizeBuilder>? Size { get; set; } = Size.Default;
+    public CssValue<SizeBuilder>? Size { get; set; } = Quark.Size.Default;
 
     [Parameter]
     public bool Static { get; set; }
@@ -159,5 +158,4 @@
             StateHasChanged();
         }
     }
-
 }

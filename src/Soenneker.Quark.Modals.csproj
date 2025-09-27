@@ -43,8 +43,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Quark.Divs" Version="3.0.22" />
-        <PackageReference Include="Soenneker.Quark.Headings" Version="3.0.18" />
-        <PackageReference Include="Soenneker.Quark.Buttons" Version="3.0.40" />
+        <PackageReference Include="Soenneker.Quark.Divs" Version="3.0.23" />
+        <PackageReference Include="Soenneker.Quark.Headings" Version="3.0.20" />
+        <PackageReference Include="Soenneker.Quark.Buttons" Version="3.0.42" />
+        <PackageReference Include="Soenneker.Quark.Spans" Version="3.0.28" />
     </ItemGroup>
 </Project>
